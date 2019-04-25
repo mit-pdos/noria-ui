@@ -17,3 +17,7 @@ function instanceFormatter(value, row, index) {
 function domainsFormatter(value) {
   return value;
 }
+
+function shutdownFormatter() {
+  return "<button type=\"button\" class=\"btn btn-danger btn-sm\"><span data-feather=\"trash-2\"></span></button>"
+}

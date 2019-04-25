@@ -1,6 +1,22 @@
     <script>
       $("#instance-table").bootstrapTable();
 
+      function shutdown(instance_addr) {
+        console.log("shutdown " + instance_addr);
+        $.ajax({
+          type: "POST",
+          url: "http://" + controller_addr + "/shutdown_worker",
+          data: "\"" + instance_addr + "\"",
+          dataType: "text",
+          success: function(data) {
+            $("#error-msg").html("success...do something").addClass("show");
+          },
+          error: function(e) {
+            $("#error-msg").html("AJAX request to controller API failed: " + e.statusText).addClass("show");
+          }
+        });
+      }
+
       function update() {
         $.ajax({
           url: "http://" + controller_addr + "/instances",
@@ -8,6 +24,16 @@
           success: function(data) {
             $("#error-msg").removeClass("show");
             $("#instance-table").bootstrapTable('load', data);
+
+            // Setup button to shutdown the instance in the row
+            const rows = $("#instance-table")[0].children[1].children;
+            for (let i = 0; i < rows.length; i++) {
+              const row = rows[i].children;
+              const addr = row[0].firstChild.innerText;
+              const button = row[4].firstChild;
+              button.onclick = function() { shutdown(addr); };
+            }
+
             feather.replace()
           },
           error: function(e) {
