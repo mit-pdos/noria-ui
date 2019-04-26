@@ -2,6 +2,16 @@
       $("#domain-table").bootstrapTable();
       feather.replace();
 
+      function format_provenance(provenance) {
+        return Object.keys(provenance).map(function(domain) {
+          return [
+            "D" + domain,
+            provenance[domain].label,
+            format_provenance(provenance[domain].edges)
+          ];
+        });
+      }
+
       function update() {
         $.ajax({
           url: "http://" + controller_addr + "/get_statistics",
@@ -17,7 +27,8 @@
                   return i + " (" + nodes[i].desc + ")";
                 }),
                 domains[i][0].min_label,
-                domains[i][0].log_size
+                domains[i][0].log_size,
+                JSON.stringify(format_provenance(domains[i][0].provenance.edges))
               ];
             });
             $("#domain-table").bootstrapTable('load', table_data);
