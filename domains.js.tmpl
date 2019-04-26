@@ -1,5 +1,6 @@
     <script>
       $("#domain-table").bootstrapTable();
+      feather.replace();
 
       function update() {
         $.ajax({
@@ -28,5 +29,4 @@
       }
 
       update();
-      setInterval(update, 1000);
     </script>

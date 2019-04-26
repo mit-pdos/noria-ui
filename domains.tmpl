@@ -1,6 +1,11 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Domain overview</h1>
+            <h1 class="h2">
+              Domain overview
+              <button type="button" class="btn btn-outline-secondary" onclick="update()">
+                <span data-feather="refresh-cw"></span>
+              </button>
+            </h1>
 
             <!-- Error message -->
             <div id="error-msg" class="alert alert-danger alert-dismissible fade" role="alert">
