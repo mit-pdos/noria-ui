@@ -1,4 +1,4 @@
-HTML = instances.html graph.html nodes.html node.html
+HTML = instances.html graph.html nodes.html node.html domains.html
 
 all: $(HTML)
 

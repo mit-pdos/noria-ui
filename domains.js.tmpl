@@ -1,0 +1,32 @@
+    <script>
+      $("#domain-table").bootstrapTable();
+
+      function update() {
+        $.ajax({
+          url: "http://" + controller_addr + "/get_statistics",
+          dataType: "json",
+          success: function(data) {
+            $("#error-msg").removeClass("show");
+            const domains = data.domains;
+            const table_data = Object.keys(domains).map(function(i) {
+              let nodes = domains[i][1];
+              return [
+                i,
+                Object.keys(nodes).map(function(i) {
+                  return i + " (" + nodes[i].desc + ")";
+                }),
+                domains[i][0].min_label,
+                domains[i][0].log_size
+              ];
+            });
+            $("#domain-table").bootstrapTable('load', table_data);
+          },
+          error: function(e) {
+            $("#error-msg").html("AJAX request to controller API failed: " + e.statusText).addClass("show");
+          }
+        });
+      }
+
+      update();
+      setInterval(update, 1000);
+    </script>
