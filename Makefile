@@ -1,4 +1,4 @@
-HTML = instances.html graph.html nodes.html node.html domains.html
+HTML = instances.html graph.html nodes.html node.html fault_tolerance.html
 
 all: $(HTML)
 
