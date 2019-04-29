@@ -39,5 +39,37 @@
         });
       }
 
+      function build_table() {
+        $.ajax({
+          type: "POST",
+          url: "http://" + controller_addr + "/table_builder",
+          data: "\"Vote\"",
+          dataType: "text",
+          success: function(data) {
+            console.log("build_table");
+            console.log(data);
+          },
+          error: function(e) {
+            console.log("failed to build table: " + e.statusText);
+          }
+        });
+      }
+
+      function build_view() {
+        $.ajax({
+          type: "POST",
+          url: "http://" + controller_addr + "/view_builder",
+          data: "\"ArticleWithVoteCount\"",
+          dataType: "text",
+          success: function(data) {
+            console.log("build_view");
+            console.log(data);
+          },
+          error: function(e) {
+            console.log("failed to build view: " + e.statusText);
+          }
+        });
+      }
+
       update();
     </script>
